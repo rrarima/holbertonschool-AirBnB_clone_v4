@@ -11,11 +11,14 @@ $(document).ready(function(){
     console.log(amenity_dict);
   });
 
-  $.get('http://127.0.0.1:5001/api/v1/status/', (data) => {
-    if (data.status === 'OK') {
-      $('div#api_status').addClass('available');
-    } else {
-      $('div#api_status').removeClass('available');
-    }
+  $.get("http://127.0.0.1:5001/api/v1/status/", function (data) {
+    const apiStatus = data.status;
+    const apiStatusElem = $("#api_status");
+
+    apiStatusElem.toggleClass("available", apiStatus === "OK");
+    apiStatusElem.css(
+      "background-color",
+      apiStatus === "OK" ? "#FF545F" : "#CCCCCC"
+    );
   });
 });
