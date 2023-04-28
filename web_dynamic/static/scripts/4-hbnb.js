@@ -22,13 +22,20 @@ $(document).ready(function () {
     );
   });
 
-  $('button').click(function () {
-    $('section.places').empty();
-    $.post({
-      url: 'http://127.0.0.1:5001/api/v1/places_search',
-      data: JSON.stringify({'amenities': Object.keys(amenityDictionary)}),
-      contentType: 'application/json',
-      success: placeArticle
+  $("button").click(function () {
+    $("section.places").empty();
+    const selectedAmenities = Object.keys(amenity_dict);
+    const requestData = { amenities: selectedAmenities };
+
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:5001/api/v1/places_search",
+      data: JSON.stringify(requestData),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (data) {
+        placeArticle(data);
+      },
     });
   });
 
@@ -44,10 +51,10 @@ $(document).ready(function () {
   });
 });
 
-  function placeArticle(data) {
-    const placesSection = $("section.places");
-    for (const place of data) {
-      placesSection.append(`
+function placeArticle(data) {
+  const placesSection = $("section.places");
+  for (const place of data) {
+    placesSection.append(`
         <article>
           <div class="title_box">
             <h2>${place.name}</h2>
@@ -55,18 +62,18 @@ $(document).ready(function () {
           </div>
           <div class="information">
             <div class="max_guest">${place.max_guest} ${
-        place.max_guest !== 1 ? "Guests" : "Guest"
-      }</div>
+      place.max_guest !== 1 ? "Guests" : "Guest"
+    }</div>
             <div class="number_rooms">${place.number_rooms} ${
-        place.number_rooms !== 1 ? "Bedrooms" : "Bedroom"
-      }</div>
+      place.number_rooms !== 1 ? "Bedrooms" : "Bedroom"
+    }</div>
             <div class="number_bathrooms">${place.number_bathrooms} ${
-        place.number_bathrooms !== 1 ? "Bathrooms" : "Bathroom"
-      }</div>
+      place.number_bathrooms !== 1 ? "Bathrooms" : "Bathroom"
+    }</div>
           </div>
-          <div class="user">Owner: ${place.Owner}</div>
+          <div class="user">Owner: ${place.owner}</div>
           <div class="description">${place.description}</div>
         </article>
       `);
-    }
   }
+}
