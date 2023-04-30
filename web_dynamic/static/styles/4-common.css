@@ -3,9 +3,62 @@ body {
     padding: 0;
     color: #484848;
     font-size: 14px;
-    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 body .container {
     max-width: 1000px;
     margin: 30px auto;
+}
+
+.reviews {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.reviews h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reviews .toggle_reviews {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reviews .toggle_reviews:hover {
+    text-decoration: underline;
+}
+
+.review_list {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.review_list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.review_list li:last-child {
+    border-bottom: none;
+}
+
+.review_list h3 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+}
+
+.review_list p {
+    margin: 0;
 }
